@@ -10,18 +10,15 @@ public class Elf : Creature
     public int Agility
     {
         get => _agility;
-        init
-        {
-            if (_agility < 0) _agility = 0;
-            else if (_agility > 10) _agility = 10;
-            else _agility = value;
-        }
+        init => _agility = Validator.Limiter(value, 0, 10);
     }
 
     public override int Power
     {
         get => 8 * Level + 2 * Agility;
     }
+
+    public override string Info => $"{Name} [{Level}][{Agility}]";
 
     //constructors
     public Elf() : base("Unknown elf", 1) { }

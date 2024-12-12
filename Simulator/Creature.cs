@@ -7,47 +7,19 @@ public abstract class Creature
     private int _level = 1;
 
     //properties
-    public string Name { 
-        get => _name; 
-        init
-        {
-            int minLength = 3;
-            int maxLength = 25;
-            _name = value;
-            //trimming
-            _name = _name.Trim();
-            //cutting long names
-            if (_name.Length > maxLength)
-            {
-                _name = _name.Substring(0, maxLength);
-                _name = _name.Trim();
-            }
-            //filling short names
-            if (_name.Length < minLength)
-            {
-                do
-                {
-                    _name += '#';
-                } while (_name.Length < minLength);
-            }
-            //names should start with upper case
-            _name = char.ToUpper(_name[0]) + _name.Substring(1);
-        } 
+    public string Name
+    {
+        get => _name;
+        init => _name = Validator.Shortener(value, 3, 25, '#');
     }
     public int Level 
     { 
-        get => _level; 
-        init
-        {
-            //fitting into brackets
-            _level = value;
-            _level = _level < 1 ? 1 : _level;
-            _level = _level > 10 ? 10 : _level;
-        } 
+        get => _level;
+        init => _level = Validator.Limiter(value, 1, 10);
     }
     public abstract int Power { get; }
 
-    public string Info => $"{Name} [{Level}]";
+    public abstract string Info {  get; }
 
     //constructors
     public Creature(string name, int level = 1)
@@ -83,4 +55,9 @@ public abstract class Creature
 
     //move to string of directions
     public void Go(string directions) => Go(DirectionParser.Parse(directions));
+
+    public override string ToString()
+    {
+        return GetType().Name.ToUpper() + ": " + Info;
+    }
 }
