@@ -7,7 +7,7 @@ namespace Simulator.Maps;
 /// </summary>
 public abstract class Map
 {
-    public List<Creature>[,] MapCreatures { get; set; }
+    public List<IMappable>[,] MapCreatures { get; set; }
     public int SizeX { get; init; }
     public int SizeY { get; init; }
 
@@ -17,7 +17,7 @@ public abstract class Map
     
         SizeX = sizeX;
         SizeY = sizeY;
-        MapCreatures = new List<Creature>[SizeX,SizeY];
+        MapCreatures = new List<IMappable>[SizeX,SizeY];
     }
     /// <summary>
     /// Check if give point belongs to the map.
@@ -44,37 +44,37 @@ public abstract class Map
     public abstract Point NextDiagonal(Point p, Direction d);
 
     /// <summary>
-    /// Adds creature to the map.
+    /// Adds IMappable to the map.
     /// </summary>
     /// <param name="p">Position of creature.</param>
-    /// <param name="c">Creature to be added.</param>
+    /// <param name="c">IMappable to be added.</param>
     /// <returns></returns>
-    public abstract void Add(Point p, Creature c);
+    public abstract void Add(Point p, IMappable c);
 
     /// <summary>
-    /// Removes creature from the map.
+    /// Removes IMappable from the map.
     /// </summary>
     /// <param name="p">Position of creature.</param>
-    /// <param name="c">Creature to be removed.</param>
-    public abstract void Remove(Point p, Creature c);
+    /// <param name="c">IMappable to be removed.</param>
+    public abstract void Remove(Point p, IMappable c);
 
     /// <summary>
-    /// Moves creature between points.
+    /// Moves IMappable between points.
     /// </summary>
     /// <param name="p"></param>
     /// <param name="c"></param>
-    public abstract void Move(Point p1, Point p2, Creature c);
+    public abstract void Move(Point p1, Point p2, IMappable c);
 
     /// <summary>
-    /// Checks which creatures are at certain map point.
+    /// Checks which IMappables are at certain map point.
     /// </summary>
     /// <param name="p">Point to be checked.</param>
-    public abstract List<Creature> At(Point p);
+    public abstract List<IMappable> At(Point p);
 
     /// <summary>
-    /// Checks which creatures are at certain map point.
+    /// Checks which IMappables are at certain map point.
     /// </summary>
     /// <param name="x">X axis to be checked</param>
     /// <param name="y">Y axis to be checked</param>
-    public abstract List<Creature> At(int x, int y);
+    public abstract List<IMappable> At(int x, int y);
 }

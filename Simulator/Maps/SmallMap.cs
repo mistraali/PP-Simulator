@@ -25,20 +25,20 @@ public abstract class SmallMap : Map
         throw new NotImplementedException();
     }
 
-    public override void Add(Point p, Creature c)
+    public override void Add(Point p, IMappable c)
     {
         if (this.Exist(p))
         {
             c.Map = this;
             c.Position = p;
             if (MapCreatures[p.X, p.Y] == null)
-                MapCreatures[p.X, p.Y] = new List<Creature> { c };
+                MapCreatures[p.X, p.Y] = new List<IMappable> { c };
             else
                 MapCreatures[p.X, p.Y].Add(c);
         }
     }
 
-    public override void Remove(Point p, Creature c)
+    public override void Remove(Point p, IMappable c)
     {
         if (this.Exist(p))
         {
@@ -48,20 +48,20 @@ public abstract class SmallMap : Map
         }
     }
 
-    public override void Move(Point p1, Point p2, Creature c)
+    public override void Move(Point p1, Point p2, IMappable c)
     {
         if (c.Map != null && this.Exist(p1) && this.Exist(p2))
         {
             c.Position = p2;
             MapCreatures[p1.X, p1.Y].Remove(c);
             if (MapCreatures[p2.X, p2.Y] == null)
-                MapCreatures[p2.X, p2.Y] = new List<Creature> { c };
+                MapCreatures[p2.X, p2.Y] = new List<IMappable> { c };
             else
                 MapCreatures[p2.X, p2.Y].Add(c);
         }
     }
 
-    public override List<Creature> At(Point p)
+    public override List<IMappable> At(Point p)
     {
         if (this.Exist(p))
             return MapCreatures[p.X, p.Y];
@@ -69,7 +69,7 @@ public abstract class SmallMap : Map
             return null;
     }
 
-    public override List<Creature> At(int x, int y)
+    public override List<IMappable> At(int x, int y)
     {
         if (this.Exist(new Point(x,y)))
             return MapCreatures[x, y];
