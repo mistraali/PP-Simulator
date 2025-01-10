@@ -56,7 +56,7 @@ public abstract class Creature
     }
 
     //move to string of directions
-    public String[] Go(string directions) => Go(DirectionParser.Parse(directions));
+    public string[] Go(string directions) => Go(DirectionParser.Parse(directions).ToArray());
 
     public override string ToString()
     {

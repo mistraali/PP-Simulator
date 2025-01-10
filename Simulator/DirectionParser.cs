@@ -2,7 +2,7 @@
 
 public static class DirectionParser
 {
-    public static Direction[] Parse(string input)
+    public static List<Direction> Parse(string input)
     {
         List<Direction> result = new();
         foreach (char c in input.ToUpper())
@@ -12,6 +12,6 @@ public static class DirectionParser
             if (c == 'D') result.Add(Direction.Down);
             if (c == 'L') result.Add(Direction.Left);
         }
-        return result.ToArray();
+        return result;
     }
 }
