@@ -75,6 +75,10 @@ public class Simulation
             throw new ArgumentException("Bad input for creatures' positions!");
         else
             this.Positions = positions;
+        for (int i = 0; i < positions.Count; i++)
+        {
+            map.Add(positions[i], creatures[i]);
+        }
         this.Moves = moves;
     }
 
@@ -84,6 +88,8 @@ public class Simulation
     /// </summary>
     public void Turn() {
         if (Finished) throw new InvalidOperationException("End of moves!");
-        CurrentCreature.Go((Direction)Enum.Parse(typeof(Direction),CurrentMoveName));
+        CurrentCreature.Go((Direction)Enum.Parse(typeof(Direction), char.ToUpper(CurrentMoveName[0]) + CurrentMoveName.Substring(1)));
+        _indexOfMoves++;
+        if (DirectionParser.Parse(Moves).Count == _indexOfMoves) Finished = true;
     }
 }
