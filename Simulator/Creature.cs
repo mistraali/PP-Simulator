@@ -1,4 +1,6 @@
-﻿namespace Simulator;
+﻿using Simulator.Maps;
+
+namespace Simulator;
 
 public abstract class Creature
 {
@@ -21,6 +23,10 @@ public abstract class Creature
 
     public abstract string Info {  get; }
 
+    public Point? Position { get; set; }
+
+    public Map? Map { get; set; }
+
     //constructors
     public Creature(string name, int level = 1)
     {
@@ -30,36 +36,30 @@ public abstract class Creature
 
     public Creature() { }
 
-    //methods
-    //write greeting to console
+    /// <summary>
+    /// Forces creature to say hello.
+    /// </summary>
+    /// <returns></returns>
     public abstract string Greeting();
 
-    //advance by 1 level
+    /// <summary>
+    /// Advance creature by 1 level.
+    /// </summary>
     public void Upgrade()
     {
         if (Level < 10) _level++;
     }
 
-    //move to single direction
-    public string Go(Direction direction) => $"{direction.ToString().ToLower()}";
-
-    //move to array of directions
-    public String[] Go(Direction[] directions)
-    {
-        String[] strings = new String[directions.Length];
-        int i = 0;
-        foreach (Direction move in directions)
+    /// <summary>
+    /// Moves creature in direction. Requires map and position to be present.
+    /// </summary>
+    /// <param name="direction">Give direction to move.</param>
+    public void Go(Direction direction) {
+        if (Position != null && Map != null)
         {
-            strings[i++] = new string(Go(move));
+            Point nextPosition = Map.Next((Point)Position, direction);
+            Map.Move((Point)Position, nextPosition, this);
+            Position = nextPosition;
         }
-        return strings;
-    }
-
-    //move to string of directions
-    public string[] Go(string directions) => Go(DirectionParser.Parse(directions).ToArray());
-
-    public override string ToString()
-    {
-        return GetType().Name.ToUpper() + ": " + Info;
     }
 }
