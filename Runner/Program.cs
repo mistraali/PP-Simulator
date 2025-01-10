@@ -1,4 +1,7 @@
-﻿namespace Simulator;
+﻿using Simulator;
+using Simulator.Maps;
+
+namespace Runner;
 
 internal class Program
 {
@@ -35,8 +38,8 @@ internal class Program
         List<Object> l0 = new List<Object> { x1, y1, x2, y2 };
         createRectangle(l0);    //(0, 5):(2, 8)
 
-        Point p1 = new Point(0,5);
-        Point p2 = new Point(2,8);
+        Point p1 = new Point(0, 5);
+        Point p2 = new Point(2, 8);
         List<Object> l1 = new List<Object> { p1, p2 };
         createRectangle(l1);    //(0, 5):(2, 8)
 
@@ -61,7 +64,7 @@ internal class Program
         {
             try
             {
-                Maps.SmallSquareMap map = new Maps.SmallSquareMap(size);
+                SmallSquareMap map = new SmallSquareMap(size);
                 Console.WriteLine($"Trying new map. Size: {map.Size}");
             }
             catch (ArgumentOutOfRangeException e)
@@ -76,14 +79,14 @@ internal class Program
         CreateMap(2);   //Invalid size for SmallSquareMap!
         CreateMap(22);  //Invalid size for SmallSquareMap!
 
-        Maps.SmallSquareMap map = new Maps.SmallSquareMap(10);
+        SmallSquareMap map = new SmallSquareMap(10);
 
         Point p1 = new Point(0, 0);
         Console.WriteLine(map.Next(p1, Direction.Up));          //(0,1)
         Console.WriteLine(map.NextDiagonal(p1, Direction.Up));  //(1,1)
         Console.WriteLine(map.Next(p1, Direction.Down));        //(0,0)
         Console.WriteLine(map.NextDiagonal(p1, Direction.Down));//(0,0)
-        Console.WriteLine(map.Next(new Point(40,40), Direction.Up));    //(40,40)
-        Console.WriteLine(map.NextDiagonal(new Point(-40,-40), Direction.Up));  //(-40,-40)
+        Console.WriteLine(map.Next(new Point(40, 40), Direction.Up));    //(40,40)
+        Console.WriteLine(map.NextDiagonal(new Point(-40, -40), Direction.Up));  //(-40,-40)
     }
 }

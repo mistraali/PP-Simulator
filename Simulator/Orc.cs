@@ -24,7 +24,7 @@ public class Orc : Creature
     public Orc(string name, int level = 1, int rage = 0) : base(name, level) { Rage = rage; }
 
     //methods
-    public override void SayHi() => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.");
+    public override string Greeting() => $"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.";
     
 
     public void Hunt()
@@ -35,6 +35,5 @@ public class Orc : Creature
             _huntCounter = 0;
             if (Rage < 10) _rage++;
         }
-        Console.WriteLine($"{Name} is hunting.");
     }
 }

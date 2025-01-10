@@ -32,7 +32,7 @@ public abstract class Creature
 
     //methods
     //write greeting to console
-    public abstract void SayHi();
+    public abstract string Greeting();
 
     //advance by 1 level
     public void Upgrade()
@@ -41,20 +41,22 @@ public abstract class Creature
     }
 
     //move to single direction
-    public void Go(Direction direction)
-    {
-        string lowerDirection = char.ToLower(direction.ToString()[0]) + direction.ToString().Substring(1);
-        Console.WriteLine($"{Name} goes {lowerDirection}");
-    }
+    public string Go(Direction direction) => $"{direction.ToString().ToLower()}";
 
     //move to array of directions
-    public void Go(Direction[] directions)
+    public String[] Go(Direction[] directions)
     {
-        foreach (Direction move in directions) Go(move);
+        String[] strings = new String[directions.Length];
+        int i = 0;
+        foreach (Direction move in directions)
+        {
+            strings[i++] = new string(Go(move));
+        }
+        return strings;
     }
 
     //move to string of directions
-    public void Go(string directions) => Go(DirectionParser.Parse(directions));
+    public String[] Go(string directions) => Go(DirectionParser.Parse(directions));
 
     public override string ToString()
     {
