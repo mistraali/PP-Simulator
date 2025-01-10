@@ -6,6 +6,8 @@ internal class Program
     {
         Console.WriteLine("Starting Simulator!\n");
         Lab5a();
+        Console.WriteLine();
+        Lab5b();
     }
     static void Lab5a()
     {
@@ -52,5 +54,36 @@ internal class Program
         Point p8 = new Point(0, 8);
         List<Object> l4 = new List<Object> { p7, p8 };
         createRectangle(l4);    //(0, 8):(2, 10)
+    }
+    static void Lab5b()
+    {
+        var CreateMap = new Action<int>(size =>
+        {
+            try
+            {
+                Maps.SmallSquareMap map = new Maps.SmallSquareMap(size);
+                Console.WriteLine($"Trying new map. Size: {map.Size}");
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        });
+
+        CreateMap(10);  //10
+        CreateMap(5);   //5
+        CreateMap(20);  //20
+        CreateMap(2);   //Invalid size for SmallSquareMap!
+        CreateMap(22);  //Invalid size for SmallSquareMap!
+
+        Maps.SmallSquareMap map = new Maps.SmallSquareMap(10);
+
+        Point p1 = new Point(0, 0);
+        Console.WriteLine(map.Next(p1, Direction.Up));          //(0,1)
+        Console.WriteLine(map.NextDiagonal(p1, Direction.Up));  //(1,1)
+        Console.WriteLine(map.Next(p1, Direction.Down));        //(0,0)
+        Console.WriteLine(map.NextDiagonal(p1, Direction.Down));//(0,0)
+        Console.WriteLine(map.Next(new Point(40,40), Direction.Up));    //(40,40)
+        Console.WriteLine(map.NextDiagonal(new Point(-40,-40), Direction.Up));  //(-40,-40)
     }
 }
