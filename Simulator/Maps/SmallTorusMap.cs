@@ -1,16 +1,14 @@
 ﻿namespace Simulator.Maps;
 
-public class SmallTorusMap : Map
+public class SmallTorusMap : SmallMap
 {
-    public readonly int Size;
-    public SmallTorusMap(int size)
+    public SmallTorusMap(int sizeX, int sizeY) : base(sizeX, sizeY)
     {
-        if (5 <= size && size <= 20) Size = size;
-        else throw new ArgumentOutOfRangeException("Pick size between 5 and 20!");
     }
+
     public override bool Exist(Point p)
     {
-        if (new Rectangle(new Point(0, 0), new Point(Size - 1, Size - 1)).Contains(p))
+        if (new Rectangle(new Point(0, 0), new Point(SizeX - 1, SizeY - 1)).Contains(p))
             return true;
         else
             return false;
@@ -20,13 +18,13 @@ public class SmallTorusMap : Map
     {
         if (!Exist(p)) return p;
         Point np = p.Next(d);
-        return new Point((np.X+20) % Size, (np.Y+20) % Size);
+        return new Point((np.X+20) % SizeX, (np.Y+20) % SizeY);
     }
 
     public override Point NextDiagonal(Point p, Direction d)
     {
         if (!Exist(p)) return p;
         Point np = p.NextDiagonal(d);
-        return new Point((np.X + 20) % Size, (np.Y + 20) % Size);
+        return new Point((np.X + 20) % SizeX, (np.Y + 20) % SizeY);
     }
 }

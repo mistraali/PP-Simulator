@@ -5,6 +5,16 @@
 /// </summary>
 public abstract class Map
 {
+    public int SizeX { get; init; }
+    public int SizeY { get; init; }
+
+    public Map(int sizeX, int sizeY)
+    {
+        if (sizeX < 5 || sizeY < 5) throw new ArgumentOutOfRangeException("Map cannot be smaller than 5!");
+    
+        SizeX = sizeX;
+        SizeY = sizeY;
+    }
     /// <summary>
     /// Check if give point belongs to the map.
     /// </summary>

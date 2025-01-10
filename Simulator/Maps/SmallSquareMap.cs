@@ -1,18 +1,14 @@
 ﻿namespace Simulator.Maps;
 
-public class SmallSquareMap : Map
+public class SmallSquareMap : SmallMap
 {
-    public readonly int Size;
-
-    public SmallSquareMap(int size)
+    public SmallSquareMap(int sizeX, int sizeY) : base(sizeX, sizeY)
     {
-        if (5 <= size && size <= 20) Size = size;
-        else throw new ArgumentOutOfRangeException("Pick size between 5 and 20!");
     }
 
     public override bool Exist(Point p)
     {
-        if (new Rectangle(new Point(0,0), new Point(Size-1,Size-1)).Contains(p)) 
+        if (new Rectangle(new Point(0,0), new Point(SizeX-1,SizeY-1)).Contains(p)) 
             return true;
         else 
             return false;
