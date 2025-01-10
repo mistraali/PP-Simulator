@@ -18,11 +18,11 @@ internal class Program
                 else if (points.Count == 4)
                     Console.WriteLine(new Rectangle((int)points[0], (int)points[1], (int)points[2], (int)points[3]));
                 else
-                    throw new ArgumentException();
+                    throw new ArgumentException("Invalid input!");
             }
             catch (ArgumentException e)
             {
-                Console.WriteLine("Invalid points!");
+                Console.WriteLine(e.Message);
             }
         });
 
@@ -46,7 +46,7 @@ internal class Program
         Point p5 = new Point(0, 10);
         Point p6 = new Point(2, 10);
         List<Object> l3 = new List<Object> { p5, p6 };
-        createRectangle(l3);    //Invalid points!
+        createRectangle(l3);    //Chosen points are collinear!
 
         Point p7 = new Point(2, 10);
         Point p8 = new Point(0, 8);
