@@ -7,5 +7,7 @@ public interface IMappable
 
     public string Name { get; }
 
+    public char Symbol { get; }
+
     void Go(Direction d);
 }

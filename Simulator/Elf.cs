@@ -18,6 +18,8 @@ public class Elf : Creature
         get => 8 * Level + 2 * Agility;
     }
 
+    public override char Symbol => 'E';
+
     public override string Info => $"{Name} [{Level}][{Agility}]";
 
     //constructors

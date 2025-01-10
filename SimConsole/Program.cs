@@ -10,10 +10,10 @@ internal class Program
     {
         Console.OutputEncoding = Encoding.UTF8;
         Console.WriteLine("Hello, World!");
-        SmallSquareMap map = new(5);
-        List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor"), new Orc("Grommash"), new Orc("Garrosh")];
-        List<Point> points = [new(2, 2), new(3, 1), new(1,0), new(1,0)];
-        string moves = "dlrludldddddd";
+        SmallTorusMap map = new(6,8);
+        List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor"), new Animals() { Description="Króliki"}, new Birds() { Description="Orły", CanFly=true}, new Birds { Description="Strusie", CanFly=false}];
+        List<Point> points = [new(2, 2), new(3, 1), new(1,0), new(4,6), new(4,2)];
+        string moves = "dlrludlddurldul";
 
         Simulation simulation = new(map, creatures, points, moves);
         MapVisualizer mapVisualizer = new(simulation.Map);

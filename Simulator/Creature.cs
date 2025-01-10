@@ -27,6 +27,8 @@ public abstract class Creature : IMappable
 
     public Map? Map { get; set; }
 
+    public virtual char Symbol => 'C';
+
     //constructors
     public Creature(string name, int level = 1)
     {
