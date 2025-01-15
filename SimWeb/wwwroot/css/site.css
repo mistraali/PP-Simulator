@@ -1,0 +1,76 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+} 
+
+footer, header {
+    background-color: lightblue
+}
+
+.navbar-nav .nav-link {
+    font-size: 25px;
+}
+
+
+.map-header {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.map {
+    display: inline-grid;
+    gap: 0;
+    justify-content: center;
+    min-width: max-content;
+    align-items: center;
+    background-color: lightcyan;
+    padding-left: 20px;
+    padding-right: 37px;
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+
+    .map > div {
+        background-color: lightgreen;
+        font-size: 28px;
+        color: black;
+        min-width: 60px;
+        aspect-ratio: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 5px black;
+        box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+    }
+
+.map-header {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

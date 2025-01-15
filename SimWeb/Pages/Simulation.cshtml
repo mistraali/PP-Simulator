@@ -1,0 +1,48 @@
+﻿@page
+@model SimulationModel
+@{
+    ViewData["Title"] = "Symulacja";
+}
+<style>
+    .map {
+        grid-template-columns: max-content repeat(@Model.Simulation.Map.SizeX, max-content);
+        grid-template-rows: repeat(@Model.Simulation.Map.SizeY, 1fr) max-content;
+    }
+</style>
+<div class="container text-center">
+    <div class="map-header d-flex justify-content-center align-items-center">
+        <a asp-page="/Simulation" asp-route-Turn="@(Model.CurrentTurn == 0 ? 0 : Model.CurrentTurn - 1)" class="@(Model.CurrentTurn == 0 ? "disabled" : "")">
+            <button class="btn btn-secondary @(Model.CurrentTurn == 0 ? "disabled" : "")">&larr;</button>
+        </a>
+        <h4 class="mx-2 text-center mb-0">Tura: @Model.CurrentTurn</h4>
+        <a asp-page="/Simulation" asp-route-Turn="@(Model.CurrentTurn == Model.MaxTurn ? Model.MaxTurn : Model.CurrentTurn + 1)" class="@(Model.CurrentTurn == Model.MaxTurn ? "disabled" : "")">
+            <button class="btn btn-secondary @(Model.CurrentTurn == Model.MaxTurn ? "disabled" : "")">&rarr;</button>
+        </a>
+    </div>
+
+    <div class="map">
+        @for (int y = Model.Simulation.Map.SizeY - 1; y >= -1; y--)
+            {
+                if(y >= 0){
+                    <p>@y &nbsp</p>
+                    @for (int x = 0; x < Model.Simulation.Map.SizeX; x++)
+                    {
+                        <div>
+                        @if (@Model.History.TurnLogs[Model.CurrentTurn].Symbols.ContainsKey(new Simulator.Point(x, y)))
+                            {
+                            <p>@Model.History.TurnLogs[Model.CurrentTurn].Symbols[new Simulator.Point(x, y)]</p>
+                            }
+                        </div>
+                }
+            } else
+                {
+                    <span></span>
+                    @for (int x = 0; x < Model.Simulation.Map.SizeX; x++){
+                        <span>@x</span>
+                    }
+                }
+            }
+
+    </div>
+    <h4 class="map-footer mt-3">@Model.History.TurnLogs[Model.CurrentTurn].Mappable => @Model.History.TurnLogs[Model.CurrentTurn].Move</h4>
+</div>
