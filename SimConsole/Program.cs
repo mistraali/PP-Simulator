@@ -16,7 +16,7 @@ internal class Program
         string moves = "dlrludlddurldul";
 
         Simulation simulation = new(map, creatures, points, moves);
-        MapVisualizer mapVisualizer = new(simulation.Map);
+/*        MapVisualizer mapVisualizer = new(simulation.Map);
 
         int turnCount = 0;
         while (!simulation.Finished)
@@ -29,7 +29,21 @@ internal class Program
             Console.WriteLine($"{simulation.CurrentCreature.Name} goes {simulation.CurrentMoveName}:");
             simulation.Turn();
             mapVisualizer.Draw();
+        }*/
+
+        Console.WriteLine();
+        Console.WriteLine("Printing history of the simulation:");
+        var history = new SimulationHistory(simulation);
+        foreach (SimulationTurnLog turnlog in history.TurnLogs)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Turn no. {history.TurnLogs.IndexOf(turnlog)}:");
+            Console.WriteLine($"Creature moving: {turnlog.Mappable}");
+            Console.WriteLine($"Move made: {turnlog.Move}");
+            foreach (var symbol in turnlog.Symbols)
+                Console.WriteLine($"{symbol.Key} {symbol.Value}");
         }
-        Console.WriteLine("End of simulation!");
+        Console.WriteLine();
+        Console.WriteLine("End of simulation history!");
     }
 }

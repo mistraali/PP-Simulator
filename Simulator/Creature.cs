@@ -39,6 +39,15 @@ public abstract class Creature : IMappable
     public Creature() { }
 
     /// <summary>
+    /// Stringify type, name and info of a creature.
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()
+    {
+        return $"{GetType().Name}: {Info}";
+    }
+
+    /// <summary>
     /// Forces creature to say hello.
     /// </summary>
     /// <returns></returns>
