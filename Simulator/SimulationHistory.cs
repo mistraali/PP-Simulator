@@ -18,7 +18,6 @@ public class SimulationHistory
         Run();
     }
 
-    //
     private void Run()
     {
         //Recording state before simulation begins

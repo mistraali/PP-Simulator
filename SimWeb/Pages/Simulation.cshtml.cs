@@ -8,36 +8,39 @@ namespace SimWeb.Pages
 {
     public class SimulationModel : PageModel
     {
-        public Simulation Simulation { get; }
+        public bool IsGeneratable = true;
+        public int SizeX { get; set; }
+        public int SizeY { get; set; }
 
-        public SimulationHistory History { get; }
-
-        public int MaxTurn { get; }
+        public int MaxTurn { get; set; }
         public int CurrentTurn { get; set; }
 
-        public SimulationModel()
-        {
-            Simulation = new Simulation(
-                new SmallTorusMap(6, 7),
-                [new Orc("Gorbag"), new Elf("Elandor"), new Animals() { Description = "Króliki" }, 
-                    new Birds() { Description = "Orły", CanFly = true }, new Birds { Description = "Strusie", CanFly = false }],
-                [new(2, 2), new(3, 1), new(1, 0), new(3, 5), new(4, 2)],
-                "dlrludlddurldul"
-            );
-            History = new SimulationHistory(Simulation);
-
-            MaxTurn = History.TurnLogs.Count - 1;
-            CurrentTurn = 0;
-        }
+        public Dictionary<Point, char> Symbols { get; set; }
+        public string Move { get; set; }
+        public string Mappable { get; set; }
 
         public void OnGet()
         {
             int turn;
-            if (!int.TryParse(Request.Query["turn"], out turn))
+            if (!int.TryParse(Request.Query["Turn"], out turn))
             {
                 turn = 0;
             }
             CurrentTurn = turn;
+            
+            MaxTurn = HttpContext.Session.GetInt32("MaxTurn") ?? -1;
+            string str = HttpContext.Session.GetString($"Turn{turn}.Symbols");
+            Mappable = HttpContext.Session.GetString($"Turn{turn}.Mappable");
+            Move = HttpContext.Session.GetString($"Turn{turn}.Move");
+            SizeX = HttpContext.Session.GetInt32("SizeX") ?? -1;
+            SizeY = HttpContext.Session.GetInt32("SizeY") ?? -1;
+            if (SizeX == -1 || SizeY == -1 || str == null || Mappable == null || Move == null)
+            {
+                IsGeneratable = false;
+            } else
+            {
+                Symbols = SimulationTurnLog.DestrigifySymbols(str);
+            }
         }
     }
 

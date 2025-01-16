@@ -8,8 +8,11 @@ namespace SimWeb
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession();
 
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -27,7 +30,7 @@ namespace SimWeb
             app.UseAuthorization();
 
             app.MapRazorPages();
-
+            app.UseSession();
             app.Run();
         }
     }
